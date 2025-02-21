@@ -57,7 +57,7 @@ if __name__ == '__main__':
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-2)
 
-    train_losses, val_losses, val_accuracies = train(1, model, optimizer, device, pretrain_dataset, preval_dataset, criterion)
+    train_losses, val_losses, val_accuracies = train(10, model, optimizer, device, pretrain_dataset, preval_dataset, criterion)
 
     print("For the color recognition task:", train_losses[-1], val_losses[-1], val_accuracies[-1])
 
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-1)
 
-    train_losses, val_losses, val_accuracies = train(2, model, optimizer, device, train_dataset, val_dataset, criterion, is_classification=True)
+    train_losses, val_losses, val_accuracies = train(7, model, optimizer, device, train_dataset, val_dataset, criterion, is_classification=True)
 
     print("For the wildfire detection task:", train_losses[-1], val_losses[-1], val_accuracies[-1])
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-3)
 
-    train_losses, val_losses, val_accuracies = train(2, model, optimizer, device, train_dataset, val_dataset, criterion, is_classification=True)
+    train_losses, val_losses, val_accuracies = train(10, model, optimizer, device, train_dataset, val_dataset, criterion, is_classification=True)
 
     print("For the wildfire detection task:", train_losses[-1], val_losses[-1], val_accuracies[-1])
 
