@@ -11,9 +11,9 @@ from train import *
 
 if __name__ == '__main__':
         
-    pretraining_path = Path("/home/ensta/ensta-cesar/WildFire/wildfire-prediction-dataset")
-    val_path = Path("/home/ensta/ensta-cesar/WildFire/wildfire-prediction-dataset")
-    test_path = Path("/home/ensta/ensta-cesar/WildFire/wildfire-prediction-dataset")
+    pretraining_path = Path("/home/ensta/ensta-cesar/WildFire/wildfire-prediction-dataset/train")
+    val_path = Path("/home/ensta/ensta-cesar/WildFire/wildfire-prediction-dataset/valid")
+    test_path = Path("/home/ensta/ensta-cesar/WildFire/wildfire-prediction-dataset/test")
 
     data_transforms = {
             'pretrain': transforms.Compose([transforms.ToTensor()]),
