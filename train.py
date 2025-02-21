@@ -39,7 +39,10 @@ def validate(model, data_loader, loss_fn, device):
             loss = loss_fn(y_hat, y)
 
             losses.append(loss.item())
-            correct_predictions += (y_hat.argmax(dim=1) == y.argmax(dim=1)).sum().item()
+            if is_classification:
+                correct_predictions += (y_hat.argmax(dim=1) == y).sum().item()
+            else:
+                correct_predictions += (y_hat.argmax(dim=1) == y.argmax(dim=1)).sum().item()
 
     return losses, correct_predictions
 
@@ -71,6 +74,7 @@ def train(nb_epochs, model, optimizer, device, train_dataset, val_dataset, crite
             data_loader=val_loader,
             loss_fn=criterion,
             device=device,
+            is_classification=is_classification
         )
 
         epoch_train_loss = torch.mean(torch.Tensor(train_loss))
