@@ -57,7 +57,7 @@ if __name__ == '__main__':
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-4)
 
-    test_losses, test_acc = validate(model, test_loader, criterion, device, is_classification=False)
+    test_losses, test_acc = validate(model, test_loader, criterion, device, is_classification=True)
 
     print(f"For the initial: final loss = {test_losses[-1]}, test accuracy = {test_acc/len(test_dataset)}")
 
