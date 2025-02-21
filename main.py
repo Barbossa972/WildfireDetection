@@ -49,6 +49,8 @@ if __name__ == '__main__':
     os.makedirs(result_path/"coloring", exist_ok = True)
     os.makedirs(result_path/"frozen_wildfire", exist_ok = True)
     os.makedirs(result_path/"wildfire", exist_ok = True)
+    os.makedirs(os.path.join("checkpoints", "pretrained"), exist_ok = True)
+    os.makedirs(os.path.join("checkpoints", "classification"), exist_ok = True)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
