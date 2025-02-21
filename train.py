@@ -26,7 +26,7 @@ def train_one_epoch(model, optimizer, data_loader, loss_fn, device):
     return losses
 
 
-def validate(model, data_loader, loss_fn, device):
+def validate(model, data_loader, loss_fn, device, is_classification):
     model.eval()
     losses = []
     correct_predictions = 0
