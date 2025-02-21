@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     plot_curves(train_losses, val_losses, val_accuracies, save_path="results/wildfire/results.png", title_suffix="")
 
-    test_losses, test_acc = validate(model, test_loader, criterion, device, is_classification)
+    test_losses, test_acc = validate(model, test_loader, criterion, device, is_classification=True)
 
     print(f"For the test dataset: final loss = {test_losses[-1]}, test accuracy = {test_acc/len(test_dataset)}")
 
