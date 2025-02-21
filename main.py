@@ -55,7 +55,11 @@ if __name__ == '__main__':
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-2)
+    optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-4)
+
+    test_losses, test_acc = validate(model, test_loader, criterion, device, is_classification=False)
+
+    print(f"For the initial: final loss = {test_losses[-1]}, test accuracy = {test_acc/len(test_dataset)}")
 
     train_losses, val_losses, val_accuracies = train(10, model, optimizer, device, pretrain_dataset, preval_dataset, criterion)
 
@@ -66,18 +70,18 @@ if __name__ == '__main__':
     model.swap_to_classification_head(2)
     model = model.to(device)
         
-    optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-1)
+    optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-3)
 
     train_losses, val_losses, val_accuracies = train(7, model, optimizer, device, train_dataset, val_dataset, criterion, is_classification=True)
 
-    print("For the wildfire detection task:", train_losses[-1], val_losses[-1], val_accuracies[-1])
+    print("For the frozen wildfire detection task:", train_losses[-1], val_losses[-1], val_accuracies[-1])
 
     plot_curves(train_losses, val_losses, val_accuracies, save_path="results/frozen_wildfire/results.png", title_suffix="")
 
     model.unfreeze_layers()
     model = model.to(device)
 
-    optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-3)
+    optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-4)
 
     train_losses, val_losses, val_accuracies = train(10, model, optimizer, device, train_dataset, val_dataset, criterion, is_classification=True)
 
