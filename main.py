@@ -64,7 +64,8 @@ if __name__ == '__main__':
     plot_curves(train_losses, val_losses, val_accuracies, save_path="results/coloring/results.png", title_suffix="")
 
     model.swap_to_classification_head(2)
-
+    model = model.to(device)
+        
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-1)
 
     train_losses, val_losses, val_accuracies = train(2, model, optimizer, device, train_dataset, val_dataset, criterion, is_classification=True)
@@ -74,6 +75,7 @@ if __name__ == '__main__':
     plot_curves(train_losses, val_losses, val_accuracies, save_path="results/frozen_wildfire/results.png", title_suffix="")
 
     model.unfreeze_layers()
+    model = model.to(device)
 
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-3)
 
